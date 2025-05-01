@@ -1,4 +1,4 @@
-# Version Modelo E 3 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
+# Version Modelo F 2 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5, Adam, Normalizacion y 100 Epochs
 
 # Importamos librerias necesarias
 
@@ -97,10 +97,11 @@ if __name__ == '__main__':
 
     model.fc = nn.Sequential(
         nn.Linear(num_features, 512),
+        nn.BatchNorm1d(512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
-        nn.BatchNorm1d(512),
         nn.Linear(512, len(train_dataset.classes)),
+        nn.BatchNorm1d(len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
 
