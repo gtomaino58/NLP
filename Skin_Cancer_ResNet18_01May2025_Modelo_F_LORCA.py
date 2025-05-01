@@ -22,6 +22,9 @@ from sklearn.metrics import classification_report
 # Program beginning
 if __name__ == '__main__':
 
+    # Fijamos la semilla para reproducibilidad
+    torch.manual_seed(12345)
+
     # Check if GPU is available and set the device accordingly
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
