@@ -1,4 +1,4 @@
-# Version Modelo F 2 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5, Adam, Normalizacion y 100 Epochs
+# Version Modelo E 3 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
 
 # Importamos librerias necesarias
 
@@ -32,6 +32,11 @@ if __name__ == '__main__':
     # Create a transform function for Skin Cancer dataset
     transform_train = transforms.Compose([
         transforms.Resize((224, 224)),
+        transforms.CenterCrop((224, 224)),
+        transforms.RandomCrop(224, padding=4),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1), scale=(0.8, 1.2)),
+        transforms.RandomRotation(10),
         transforms.RandomResizedCrop(224),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
@@ -97,11 +102,10 @@ if __name__ == '__main__':
 
     model.fc = nn.Sequential(
         nn.Linear(num_features, 512),
-        nn.BatchNorm1d(512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
+        nn.BatchNorm1d(512),
         nn.Linear(512, len(train_dataset.classes)),
-        nn.BatchNorm1d(len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
 
