@@ -99,6 +99,7 @@ if __name__ == '__main__':
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
+        nn.BatchNorm1d(512),
         nn.Linear(512, len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
@@ -122,9 +123,9 @@ if __name__ == '__main__':
     # Use Adam optimizer with a learning rate of 0.00001 (and L2 regularization)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.RMSprop(model.parameters(), lr=0.00001)
+    #optimizer = optim.RMSprop(model.parameters(), lr=0.00001)
     #optimizer = optim.SGD(model.parameters(), lr=0.00001, momentum=0.9)
-    #optimizer = optim.Adam(model.parameters(), lr=0.00001)
+    optimizer = optim.Adam(model.parameters(), lr=0.00001)
     #optimizer = optim.Adam(model.parameters(), lr=0.00001, weight_decay=1e-4)
 
     # Print the optimizer and learning rate and device being used
