@@ -116,7 +116,7 @@ if __name__ == '__main__':
 
     # Freeze the convolutional layers to prevent them from being updated during training
     for param in model.parameters():
-        param.requires_grad = False
+        param.requires_grad = True
     for param in model.fc.parameters():
         param.requires_grad = True
 
