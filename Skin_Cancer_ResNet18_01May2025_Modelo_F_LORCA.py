@@ -122,7 +122,8 @@ if __name__ == '__main__':
     # Use Adam optimizer with a learning rate of 0.00001 (and L2 regularization)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.00001)
+    optimizer = optim.SGD(model.parameters(), lr=0.00001, momentum=0.9)
+    #optimizer = optim.Adam(model.parameters(), lr=0.00001)
     #optimizer = optim.Adam(model.parameters(), lr=0.00001, weight_decay=1e-4)
 
     # Print the optimizer and learning rate and device being used
