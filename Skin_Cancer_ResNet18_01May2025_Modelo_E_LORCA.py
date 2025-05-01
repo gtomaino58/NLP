@@ -22,6 +22,9 @@ from sklearn.metrics import classification_report
 # Program beginning
 if __name__ == '__main__':
 
+    # Fijamos la semilla para reproducibilidad
+    torch.manual_seed(12345)
+
     # Check if GPU is available and set the device accordingly
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -60,8 +63,8 @@ if __name__ == '__main__':
     num_workers = 4
     
     # Create data loaders for training and testing datasets
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
-    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, drop_last=True)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, drop_last=True)
 
     # Check the number of batches in the training and testing datasets
     print(f"Number of batches in training dataset: {len(train_loader)}")

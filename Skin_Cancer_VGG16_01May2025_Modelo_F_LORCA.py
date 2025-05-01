@@ -1,4 +1,4 @@
-# Version Modelo E 3 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
+# Version VGG16 con 3 capas y DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
 
 # Importamos librerias necesarias
 
@@ -21,9 +21,6 @@ from sklearn.metrics import classification_report
 
 # Program beginning
 if __name__ == '__main__':
-
-    # Fijamos la semilla para reproducibilidad
-    torch.manual_seed(12345)
 
     # Check if GPU is available and set the device accordingly
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -63,8 +60,8 @@ if __name__ == '__main__':
     num_workers = 4
     
     # Create data loaders for training and testing datasets
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, drop_last=True)
-    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, drop_last=True)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
     # Check the number of batches in the training and testing datasets
     print(f"Number of batches in training dataset: {len(train_loader)}")
@@ -82,11 +79,9 @@ if __name__ == '__main__':
     print(f"Number of classes in training dataset: {len(train_dataset.classes)}")
     print(f"Number of classes in testing dataset: {len(test_dataset.classes)}")
 
-    # Vamos a cargar el modelo preentrenado de ResNet18
-
-    # Load the pre-trained ResNet18 model
-    #model = models.resnet18(pretrained=True)
-    model = models.resnet18(weights='DEFAULT')
+    # Load the pre-trained VGG16 model
+    #model = models.VGG16(pretrained=True)
+    model = models.VGG16(weights='DEFAULT')
     num_features = model.fc.in_features
     print()
     print(f"Number of features in the last fully connected layer: {num_features}")
