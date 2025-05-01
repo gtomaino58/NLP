@@ -209,7 +209,7 @@ if __name__ == '__main__':
     path_res = '/home/224F8578gianfranco/LORCA/'
 
     # Vamos a guardar el modelo entrenado
-    torch.save(model.state_dict(), path_res + '/resnet18_skin_cancer_model_F.pth')
+    torch.save(model.state_dict(), path_res + '/resnet50_skin_cancer_model_F.pth')
     
     # Vamos a graficar loss vs epochs train y test
     plt.figure(figsize=(8, 5))
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     plt.ylabel('Loss')
     plt.title('Train and Test Loss vs Epochs')
     plt.grid()
-    plt.savefig(path_res + '/train_test_loss_vs_epochs_F.png')
+    plt.savefig(path_res + '/train_test_loss_vs_epochs_50.png')
     plt.close()  # Close the plot to free up memory
 
     # Vamos a graficar accuracy vs epochs train y test
@@ -254,7 +254,7 @@ if __name__ == '__main__':
     plt.ylabel('Accuracy')
     plt.title('Train and Test Accuracy vs Epochs')
     plt.grid()
-    plt.savefig(path_res + '/train_test_accuracy_vs_epochs_F.png')
+    plt.savefig(path_res + '/train_test_accuracy_vs_epochs_50.png')
     plt.close()  # Close the plot to free up memory
     
     # Vamos a graficar la matriz de confusion
@@ -291,7 +291,7 @@ if __name__ == '__main__':
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.savefig(path_res + '/confusion_matrix_F.png')
+    plt.savefig(path_res + '/confusion_matrix_50.png')
     plt.close()  # Close the plot to free up memory
 
     # Vamos a calcular la accuracy, la precision, el recall y el f1-score
@@ -303,11 +303,11 @@ if __name__ == '__main__':
     print(report_df)
     
     # Save the classification report to a text file
-    with open(path_res + '/classification_report_F.txt', 'w') as f:
+    with open(path_res + '/classification_report_50.txt', 'w') as f:
         f.write(report_df.to_string())
 
     # Save the classification report to a CSV file
-    report_df.to_csv(path_res + '/classification_report_F.csv', index=True)
+    report_df.to_csv(path_res + '/classification_report_50.csv', index=True)
 
     # Save the classification report to a JSON file
-    report_df.to_json(path_res + '/classification_report_F.json', orient='index')
+    report_df.to_json(path_res + '/classification_report_50.json', orient='index')
