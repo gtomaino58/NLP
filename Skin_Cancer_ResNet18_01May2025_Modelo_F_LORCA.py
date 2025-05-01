@@ -32,11 +32,6 @@ if __name__ == '__main__':
     # Create a transform function for Skin Cancer dataset
     transform_train = transforms.Compose([
         transforms.Resize((224, 224)),
-        transforms.CenterCrop((224, 224)),
-        transforms.RandomCrop(224, padding=4),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
-        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1), scale=(0.8, 1.2)),
-        transforms.RandomRotation(10),
         transforms.RandomResizedCrop(224),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
