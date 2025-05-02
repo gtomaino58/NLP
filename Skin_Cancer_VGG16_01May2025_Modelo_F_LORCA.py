@@ -81,6 +81,7 @@ if __name__ == '__main__':
 
     # Load the pre-trained VGG16 model
     #model = models.resnet50(pretrained=True)
+
     model = models.vgg16(weights='DEFAULT')
     model.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # Change the pooling layer to AdaptiveAvgPool2d
 
@@ -95,11 +96,11 @@ if __name__ == '__main__':
     model.classifier = nn.Sequential(
         nn.Flatten(),
         nn.BatchNorm1d(num_features),
-        nn.Linear(num_features, 512),
+        nn.Linear(num_features, 128),
         nn.ReLU(),
         nn.Dropout(p=0.25),
-        nn.BatchNorm1d(512),
-        nn.Linear(512, len(train_dataset.classes)),
+        nn.BatchNorm1d(128),
+        nn.Linear(128, len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
 
@@ -114,7 +115,7 @@ if __name__ == '__main__':
     # Freeze the convolutional layers to prevent them from being updated during training
     for param in model.parameters():
         param.requires_grad = False
-    for param in model.fc.parameters():
+    for param in model.classifier.parameters():
         param.requires_grad = True
 
     # Define the loss function and optimizer.
