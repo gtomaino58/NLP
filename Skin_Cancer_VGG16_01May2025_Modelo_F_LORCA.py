@@ -84,7 +84,7 @@ if __name__ == '__main__':
     model = models.vgg16(weights='DEFAULT')
     model.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # Change the pooling layer to AdaptiveAvgPool2d
 
-    num_features = model.fc.in_features
+    num_features = 512 # Number of features in the last fully connected layer
     print()
     print(f"Number of features in the last fully connected layer: {num_features}")
     print()
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     # Modify the last fully connected layer to match the number of classes in the dataset
     # 2 fully connected hidden layers and a binay classification    
 
-    model.fc = nn.Sequential(
+    model.classifier = nn.Sequential(
         nn.Flatten(),
         nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
