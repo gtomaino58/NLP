@@ -98,7 +98,7 @@ if __name__ == '__main__':
     # 2 fully connected hidden layers and a binay classification    
 
     model.fc = nn.Sequential(
-        nn.flatten()
+        nn.flatten(),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
