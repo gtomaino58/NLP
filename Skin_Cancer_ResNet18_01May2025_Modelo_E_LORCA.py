@@ -244,7 +244,7 @@ if __name__ == '__main__':
     plt.ylabel('Loss')
     plt.title('Train and Test Loss vs Epochs')
     plt.grid()
-    plt.savefig(path_res + '/train_test_loss_vs_epochs_E.png')
+    plt.savefig(path_res + '/train_test_loss_vs_epochs_RESNET18_E.png')
     plt.close()  # Close the plot to free up memory
 
     # Vamos a graficar accuracy vs epochs train y test
@@ -267,7 +267,7 @@ if __name__ == '__main__':
     plt.ylabel('Accuracy')
     plt.title('Train and Test Accuracy vs Epochs')
     plt.grid()
-    plt.savefig(path_res + '/train_test_accuracy_vs_epochs_E.png')
+    plt.savefig(path_res + '/train_test_accuracy_vs_epochs_RESNET18_E.png')
     plt.close()  # Close the plot to free up memory
     
     # Vamos a graficar la matriz de confusion
@@ -304,7 +304,7 @@ if __name__ == '__main__':
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.savefig(path_res + '/confusion_matrix_E.png')
+    plt.savefig(path_res + '/confusion_matrix_RESNET18_E.png')
     plt.close()  # Close the plot to free up memory
 
     # Vamos a calcular la accuracy, la precision, el recall y el f1-score
@@ -316,11 +316,11 @@ if __name__ == '__main__':
     print(report_df)
     
     # Save the classification report to a text file
-    with open(path_res + '/classification_report_E.txt', 'w') as f:
+    with open(path_res + '/classification_report_RESNET18_E.txt', 'w') as f:
         f.write(report_df.to_string())
 
     # Save the classification report to a CSV file
-    report_df.to_csv(path_res + '/classification_report_E.csv', index=True)
+    report_df.to_csv(path_res + '/classification_report_RESNET18_E.csv', index=True)
 
-    # Save the classification report to a JSON file
-    report_df.to_json(path_res + '/classification_report_E.json', orient='index')
+    # Save the classification report to a JSON file    
+    report_df.to_json(path_res + '/classification_report_RESNET18_E.json', orient='index')
