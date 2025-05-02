@@ -1,4 +1,4 @@
-# Version Modelo E 3 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
+# Version ResNet18 Modelo E model.fc de 3 capas con DROPOUTs (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
 
 # Importamos librerias necesarias
 
@@ -87,6 +87,8 @@ if __name__ == '__main__':
     # Load the pre-trained ResNet18 model
     #model = models.resnet18(pretrained=True)
     model = models.resnet18(weights='DEFAULT')
+    model.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # Change the average pooling layer to AdaptiveAvgPool2d
+
     num_features = model.fc.in_features
     print()
     print(f"Number of features in the last fully connected layer: {num_features}")
@@ -96,12 +98,16 @@ if __name__ == '__main__':
     # 3 fully connected hidden layers with multiclass classification
 
     model.fc = nn.Sequential(
+        nn.Flatten(),
+        nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
+        nn.BatchNorm1d(512),
         nn.Linear(512, 256),
         nn.ReLU(),
         nn.Dropout(p=0.25),
+        nn.BatchNorm1d(256),
         nn.Linear(256, len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )

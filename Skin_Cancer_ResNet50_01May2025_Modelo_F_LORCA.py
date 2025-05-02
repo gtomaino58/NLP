@@ -82,6 +82,8 @@ if __name__ == '__main__':
     # Load the pre-trained VGG16 model
     #model = models.resnet50(pretrained=True)
     model = models.resnet50(weights='DEFAULT')
+    model.avgpool = nn.AdaptiveAvgPool2d((1, 1))  # Change the average pooling layer to AdaptiveAvgPool2d
+
     num_features = model.fc.in_features
     print()
     print(f"Number of features in the last fully connected layer: {num_features}")
@@ -91,6 +93,8 @@ if __name__ == '__main__':
     # 2 fully connected hidden layers and a binay classification    
 
     model.fc = nn.Sequential(
+        nn.Flatten(),
+        nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),

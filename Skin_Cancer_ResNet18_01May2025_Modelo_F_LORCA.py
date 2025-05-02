@@ -1,4 +1,4 @@
-# Version Modelo E 3 capas con DROPOUT (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
+# Version ResNet Modelo F model.fc de 2 capas con DROPOUT (0,25), BS = 8, LR 10-5 y 100 Epochs
 
 # Importamos librerias necesarias
 
@@ -99,6 +99,7 @@ if __name__ == '__main__':
 
     model.fc = nn.Sequential(
         nn.Flatten(),
+        nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
