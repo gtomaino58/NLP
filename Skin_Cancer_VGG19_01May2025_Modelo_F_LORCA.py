@@ -133,7 +133,7 @@ if __name__ == '__main__':
     print(f"Using device: {device}")
 
     # Define the number of epochs for training
-    num_epochs = 200
+    num_epochs = 300
 
     # Let's get a model summary
     print()
