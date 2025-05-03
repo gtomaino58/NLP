@@ -56,7 +56,7 @@ if __name__ == '__main__':
     print()
     
     # Vamos a definir el tamaño del batch y el número de workers
-    batch_size = 16
+    batch_size = 8
     num_workers = 4
     
     # Create data loaders for training and testing datasets
