@@ -1,5 +1,4 @@
-# Version VGG16 con 2 capas, Dropout y Normalizacion, Adam, BS = 8, LR 10-5 y 100 Epochs
-
+# Version VGG16 modelo F
 # Importamos librerias necesarias
 
 from torchvision import transforms, datasets

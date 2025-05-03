@@ -1,4 +1,4 @@
-# Version ResNet Modelo F model.fc de 2 capas con DROPOUT (0,25), BS = 8, LR 10-5 y 100 Epochs
+# Version ResNet Modelo F
 
 # Importamos librerias necesarias
 

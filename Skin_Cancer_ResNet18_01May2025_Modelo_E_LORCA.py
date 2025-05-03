@@ -1,4 +1,4 @@
-# Version ResNet18 Modelo E model.fc de 3 capas con DROPOUTs (0,25 x 2), BS = 8, LR 10-5 y 100 Epochs
+# Version ResNet18 Modelo E
 
 # Importamos librerias necesarias
 
