@@ -34,14 +34,14 @@ if __name__ == '__main__':
         transforms.RandomResizedCrop(224),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     transform_test = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.CenterCrop((224, 224)),
         transforms.ToTensor(),
-        #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     # Load the dataset from the local directory
@@ -96,11 +96,11 @@ if __name__ == '__main__':
 
     model.fc = nn.Sequential(
         nn.Flatten(),
-        nn.BatchNorm1d(num_features),
+        #nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
-        nn.BatchNorm1d(512),
+        #nn.BatchNorm1d(512),
         nn.Linear(512, len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
