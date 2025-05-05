@@ -96,11 +96,11 @@ if __name__ == '__main__':
 
     model.fc = nn.Sequential(
         nn.Flatten(),
-        #nn.BatchNorm1d(num_features),
+        nn.BatchNorm1d(num_features),
         nn.Linear(num_features, 512),
         nn.ReLU(),
         nn.Dropout(p=0.25),
-        #nn.BatchNorm1d(512),
+        nn.BatchNorm1d(512),
         nn.Linear(512, len(train_dataset.classes)),
         nn.Softmax(dim=1)
     )
