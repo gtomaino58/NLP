@@ -1,4 +1,5 @@
 import keras
+import torch
 #import tensorflow as tf
 
 vocab_size = 20000  # Only consider the top 20k words
@@ -14,12 +15,13 @@ y_train
 X_test
 y_test
 
-# Compruebo si hay GPU
-gpu = tf.config.list_physical_devices('GPU')
-if gpu:
-    print("GPU disponible")
+# Compruebo si hay GPU con torch
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print("GPU is available")
 else:
-    print("No hay GPU disponible")
+    device = torch.device("cpu")
+    print("GPU is not available, using CPU")
 
 # Using keras, implement a transformer block and a token and position embedding as layers, and use them to build a classifier.
 # Train it for 1 epoch with Adam on the training partition while using the test partition to calculate the validation loss and accuracy at every epoch
