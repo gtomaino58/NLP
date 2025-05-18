@@ -3,7 +3,9 @@ import keras
 
 vocab_size = 20000  # Only consider the top 20k words
 maxlen = 200  # Only consider the first 200 words of each movie review
-(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(num_words=vocab_size)
+#(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(num_words=vocab_size)
+(X_train, y_train), (X_test, y_test) = keras.datasets.imdb.load_data(num_words=vocab_size)
+
 X_train = keras.utils.pad_sequences(X_train, maxlen=maxlen)
 X_test = keras.utils.pad_sequences(X_test, maxlen=maxlen)
 
