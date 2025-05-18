@@ -189,7 +189,7 @@ if device.type == 'cuda':
 
 Batch_Size = 16
 Learning_Rate = 0.000001 
-Num_Epochs = 80
+Num_Epochs = 10
 
 print("Hiperparametros:")
 print(f"Batch Size: {Batch_Size}")
@@ -287,17 +287,21 @@ def train_model(model, train_loader, test_loader, optimizer, criterion, num_epoc
 # Vamos a entrenar el modelo
 train_losses, test_losses, iou_scores = train_model(model, train_loader, test_loader, optimizer, criterion, num_epochs=Num_Epochs)
 
+path = '/home/224F8578gianfranco/LORCA/'
+
 # Vamos a guardar la curva de loss vs epoch
 plt.figure(figsize=(12, 5))
-plt.subplot(1, 2, 1)
 plt.plot(train_losses, label='Train Loss')
 plt.plot(test_losses, label='Test Loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-plt.subplot(1, 2, 2)
+plt.savefig(os.path.join(path, 'loss_vs_epoch.png'))
+
+# Vamos a guardar la curva de IOU vs epoch
+plt.figure(figsize=(12, 5))
 plt.plot(iou_scores, label='IOU Score')
 plt.xlabel('Epochs')
 plt.ylabel('Score')
 plt.legend()
-plt.savefig(path_images = '/home/224F8578gianfranco/LORCA/Image/curvas.png')
+plt.savefig(os.path.join(path, 'iou_vs_epoch.png'))
