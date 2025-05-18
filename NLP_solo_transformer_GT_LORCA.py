@@ -1,12 +1,9 @@
 import keras
-import torch
-#import tensorflow as tf
+import tensorflow as tf
 
 vocab_size = 20000  # Only consider the top 20k words
 maxlen = 200  # Only consider the first 200 words of each movie review
-#(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(num_words=vocab_size)
-(X_train, y_train), (X_test, y_test) = keras.datasets.imdb.load_data(num_words=vocab_size)
-
+(X_train, y_train), (X_test, y_test) = tf.keras.datasets.imdb.load_data(num_words=vocab_size)
 X_train = keras.utils.pad_sequences(X_train, maxlen=maxlen)
 X_test = keras.utils.pad_sequences(X_test, maxlen=maxlen)
 
@@ -15,13 +12,12 @@ y_train
 X_test
 y_test
 
-# Compruebo si hay GPU con torch
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print("GPU is available")
+# Compruebo si hay GPU
+gpu = tf.config.list_physical_devices('GPU')
+if gpu:
+    print("GPU disponible")
 else:
-    device = torch.device("cpu")
-    print("GPU is not available, using CPU")
+    print("No hay GPU disponible")
 
 # Using keras, implement a transformer block and a token and position embedding as layers, and use them to build a classifier.
 # Train it for 1 epoch with Adam on the training partition while using the test partition to calculate the validation loss and accuracy at every epoch
@@ -107,7 +103,7 @@ model.compile("adam", "binary_crossentropy", metrics=["accuracy"])
 model.summary()
 
 # Train the model
-history = model.fit(X_train, y_train, batch_size=32, epochs=25, validation_split=0.2)
+history = model.fit(X_train, y_train, batch_size=32, epochs=50, validation_split=0.2)
 # Evaluate the model
 loss, accuracy = model.evaluate(X_test, y_test)
 print(f"Test Loss: {loss}")
@@ -132,7 +128,7 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
 
-path = './'
+path = '/home/224F8578gianfranco/NLP/'
 
 # Save the loss vs epochs plot
 plt.plot(history.history['loss'])
